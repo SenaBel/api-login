@@ -22,7 +22,7 @@ app.use("/public/images", express.static(__dirname + "/public/images"));
 const dbs = require("./config/database");
 const dbURI = isProduction ? dbs.dbProduction : dbs.dbTest;
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(dbURI, {useUnifiedTopology: true, useNewUrlParser: true });
 
 // SETUP EJS
 app.set("view engine", "ejs");

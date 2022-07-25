@@ -21,7 +21,7 @@ const UsuarioSchema = new mongoose.Schema({
     loja: {
         type: Schema.Types.ObjectId,
         ref: "Loja",
-        //required: [true,"não pode ficar vazia."]
+        required: [true,"não pode ficar vazia."]
     },
     permissao: {
         type: Array,

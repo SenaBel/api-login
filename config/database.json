@@ -1,5 +1,6 @@
 
 {
-    "dbTest": "mongodb+srv://usuariosLogin:upQREjpXFPPfZyoP@cluster0.vdmq3th.mongodb.net/?retryWrites=true&w=majority",
-    "dbProduction": "mongodb+srv://usuariosLogin:upQREjpXFPPfZyoP@cluster0.vdmq3th.mongodb.net/?retryWrites=true&w=majority"
+    "dbTest": "mongodb+srv://homologo:9UeTuWAGHDhgJBDQ@cluster0.pibueuc.mongodb.net/?retryWrites=true&w=majority",
+    "dbProduction": "mongodb+srv://homologo:9UeTuWAGHDhgJBDQ@cluster0.pibueuc.mongodb.net/?retryWrites=true&w=majority"
 }
+
