@@ -10,12 +10,6 @@ const cors = require("cors");
 // START
 const app = express();
 
-app.use((req,res, next)=>{
-    res.setHeader('Access-Control-Allow-Origin',"*");
-    res.setHeader('Access-Control-Allow-Headers',"*");
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-});
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
@@ -36,7 +30,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors({ origin: true }));
+app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
@@ -48,6 +42,14 @@ app.use(bodyParser.json({ limit: 1.5*1024*1024 }));
 require("./models");
 // ROTAS
 app.use("/", require("./routes"));
+
+app.use((req,res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin',"*");
+    res.setHeader('Access-Control-Allow-Headers',"*");
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 
 // 404 - ROTA
 app.use((req, res, next) => {
