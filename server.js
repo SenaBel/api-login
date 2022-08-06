@@ -31,13 +31,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors({
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
-  'origin': '*',
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}));
+app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
