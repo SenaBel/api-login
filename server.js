@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 
+
 // START
 const app = express();
 
@@ -30,7 +31,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors({origin: "*"}));
+app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
