@@ -30,7 +30,7 @@ mongoose.connect(dbURI, {useUnifiedTopology: true, useNewUrlParser: true });
 app.set("view engine", "ejs");
 
 var corsOptions = {
-    origin: 'http://localhost:8000', 
+    origin: '*', 
     optionsSuccessStatus: 200
   }
 // CONFIGURACOES
