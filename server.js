@@ -29,7 +29,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors());
+app.use(cors({ origin: true }));
 app.disable('x-powered-by');
 app.use(compression());
 
