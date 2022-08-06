@@ -29,9 +29,13 @@ mongoose.connect(dbURI, {useUnifiedTopology: true, useNewUrlParser: true });
 // SETUP EJS
 app.set("view engine", "ejs");
 
+var corsOptions = {
+    origin: 'http://localhost:8000', 
+    optionsSuccessStatus: 200
+  }
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors());
+app.use(cors(corsOptions));
 app.disable('x-powered-by');
 app.use(compression());
 
@@ -46,11 +50,6 @@ app.use("/", require("./routes"));
 
 // 404 - ROTA
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header(
-        "Access-Control-Allow-Headers", 
-        "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization");
     const err = new Error("Not Found");
     err.status = 404;
     next(err);
@@ -58,11 +57,6 @@ app.use((req, res, next) => {
 
 // ROTA - 422, 500, 401
 app.use((err, req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header(
-        "Access-Control-Allow-Headers", 
-        "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization");
     res.status(err.status || 500);
     if(err.status !== 404) console.warn("Error: ", err.message, new Date());
     res.json(err);
