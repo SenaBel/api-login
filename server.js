@@ -29,13 +29,9 @@ mongoose.connect(dbURI, {useUnifiedTopology: true, useNewUrlParser: true });
 // SETUP EJS
 app.set("view engine", "ejs");
 
-var corsOptions = {
-    origin: '*', 
-    optionsSuccessStatus: 200
-  }
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors(corsOptions));
+app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
@@ -50,6 +46,11 @@ app.use("/", require("./routes"));
 
 // 404 - ROTA
 app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
     const err = new Error("Not Found");
     err.status = 404;
     next(err);
