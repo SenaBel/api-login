@@ -10,6 +10,13 @@ const cors = require("cors");
 // START
 const app = express();
 
+app.use((req,res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin',"*");
+    res.setHeader('Access-Control-Allow-Headers',"*");
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
