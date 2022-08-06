@@ -58,6 +58,11 @@ app.use((req, res, next) => {
 
 // ROTA - 422, 500, 401
 app.use((err, req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header(
+        "Access-Control-Allow-Headers", 
+        "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization");
     res.status(err.status || 500);
     if(err.status !== 404) console.warn("Error: ", err.message, new Date());
     res.json(err);
