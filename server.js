@@ -35,24 +35,6 @@ app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
 
 // SETUP BODY PARSER
 app.use(bodyParser.urlencoded({ extended: false, limit: 1.5*1024*1024 }));
@@ -61,7 +43,10 @@ app.use(bodyParser.json({ limit: 1.5*1024*1024 }));
 // MODELS
 require("./models");
 // ROTAS
-app.use("/", require("./routes"));
+app.use("/", require("./routes"), (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.send('hello world')
+});
 
 // 404 - ROTA
 app.use((req, res, next) => {
