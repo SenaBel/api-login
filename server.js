@@ -30,7 +30,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors({origin: '*', credentials: true}));
+app.use(cors());
 app.disable('x-powered-by');
 app.use(compression());
 
@@ -45,6 +45,7 @@ app.use("/", require("./routes"));
 
 // 404 - ROTA
 app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*")
     const err = new Error("Not Found");
     err.status = 404;
     next(err);
