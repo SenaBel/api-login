@@ -30,7 +30,7 @@ app.set("view engine", "ejs");
 
 // CONFIGURACOES
 if(!isProduction) app.use(morgan("dev"));
-app.use(cors("Access-Control-Allow-Origin", "*"));
+app.use(cors({origin: "*"}));
 app.disable('x-powered-by');
 app.use(compression());
 
